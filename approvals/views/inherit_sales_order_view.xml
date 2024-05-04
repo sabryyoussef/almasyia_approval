@@ -1,0 +1,36 @@
+<odoo>
+    <data>
+        <record id="view_order_form_inherit" model="ir.ui.view">
+            <field name="name">sale.order.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//header/button[@name='action_quotation_send']" position="after">
+                    <button name="send_to_engineering"
+                            string="Send to Engineering"
+                            type="object"
+                            class="btn-primary"
+                            states="draft"
+                    />
+                </xpath>
+                <xpath expr="//header/button[@name='action_quotation_send']" position="after">
+                    <button name="action_done"
+                            string="mark as done"
+                            type="object"
+                            class="btn-primary"
+                            states="wait"
+/>
+                </xpath>
+                <xpath expr="//field[@name='state']" position="replace">
+                    <field name="state"
+                           widget="statusbar"
+                           statusbar_visible="draft,wait,eng,sent,waiting"
+                           readonly="1"/>
+                </xpath>
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="confirmed_user_id"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
